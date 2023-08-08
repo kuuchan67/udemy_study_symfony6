@@ -13,15 +13,15 @@ class HelloController extends AbstractController
         ['message' => 'Hi', 'created' => '2022/04/12'],
         ['message' => 'Bye!', 'created' => '2021/05/12']
     ];
-    #[Route('/{limit?3}', name: 'app_index')]
-    public function index(int $limit): Response
+    #[Route('/', name: 'app_index')]
+    public function index(): Response
     {
 //        return new Response(implode(',', array_slice($this->message, 0, $limit)));
 
         return $this->render('hello/index.html.twig', [
             'controller_name' => 'HelloController',
             'messages' => $this->messages,
-            'limit' => $limit
+            'limit' => 3
         ]);
     }
 

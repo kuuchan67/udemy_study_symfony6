@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HelloController!{% endblock %}
+
+{% block body %}
+
+<div>
+    {% if messages|length > 0 %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% else %}
+        メッセージはありません。
+    {% endif %}
+</div>
+{% endblock %}

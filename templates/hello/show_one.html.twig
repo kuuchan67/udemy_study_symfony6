@@ -4,5 +4,6 @@
 
 {% block body %}
 <div>メッセージ</div>
-<div><p>{{ message }}</p></div>
+<div><p>{{ message.message }}</p></div>
+    {{ include('hello/_message.html.twig',{ message: message}) }}
 {% endblock %}

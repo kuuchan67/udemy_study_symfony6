@@ -1,0 +1,7 @@
+<div>
+    {% if date(message.created) < date('-2 year') %}
+        2年以上前です
+    {% else %}
+        {{ message.created|date('Y-m-d') }}
+    {% endif %}
+</div>

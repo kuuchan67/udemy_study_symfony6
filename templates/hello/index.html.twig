@@ -5,9 +5,11 @@
 {% block body %}
 
 <div>
-    {% if messages|length > 0 %}
-        {% for message in messages %}
-            {{ message }}
+    {% if messages|slice(0,limit)|length > 0 %}
+        {% for key, message in messages|slice(0,limit) %}
+                <a href="{{ path('app_message', {id: key}) }}">{{ message.message }}</a>
+                {{ include('hello/_message.html.twig', { message: message}) }}
+
         {% endfor %}
     {% else %}
         メッセージはありません。

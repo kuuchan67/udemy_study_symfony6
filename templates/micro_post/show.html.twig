@@ -1,9 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}詳細-{{ post.title}}{% endblock %}
-
+{% block bread %}→ 詳細{% endblock %}
 {% block body %}
-    <div>{{ post.title}}</div>
-    <div>{{ post.text}}</div>
-    <div>{{ post.created | date('Y-m-d')}}</div>
+    {{ include('micro_post/_post.html.twig', {post:post}) }}
 {% endblock %}

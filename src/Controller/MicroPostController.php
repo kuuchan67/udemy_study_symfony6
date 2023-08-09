@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\MicroPost;
+use App\Form\MicroPostType;
 use App\Repository\MicroPostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -33,15 +34,8 @@ class MicroPostController extends AbstractController
     #[Route('/micro-post/add', name: 'app_micro_post_add', priority: 2)]
     public function add(Request $request, MicroPostRepository $repo):Response
     {
-        $microPost = new MicroPost();
-        $form = $this->createFormBuilder($microPost)
-            ->add("title")
-            ->add("text")
-            ->add('submit', SubmitType::class, [
-                'label' => "投稿"
-            ])
-            ->getForm()
-            ;
+        $form = $this->createForm(MicroPostType::class, new MicroPost());
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var MicroPost $post */
@@ -62,6 +56,31 @@ class MicroPostController extends AbstractController
             ]
         );
 
+    }
+    #[Route('/micro-post/{post}/edit', name: 'app_micro_post_edit')]
+    public function edit(MicroPost $post, Request $request, MicroPostRepository $repo):Response
+    {
+
+        $form = $this->createForm(MicroPostType::class, $post);
+        ;
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var MicroPost $post */
+            $post = $form->getData();
+            $repo->add($post, true);
+            $this->addFlash(
+                'success',
+                '更新しました！'
+            );
+            return $this->redirectToRoute('app_micro_post');
+
+        }
+        return $this->render(
+            'micro_post/edit.html.twig',
+            [
+                'form' => $form,
+            ]
+        );
 
     }
 }

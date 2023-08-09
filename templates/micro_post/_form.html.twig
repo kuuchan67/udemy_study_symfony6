@@ -1,0 +1,14 @@
+{{ form_start(form) }}
+<div>
+    <dl>
+        <dt>{{ form_label(form.title) }}</dt>
+        <dt>{{ form_widget(form.title) }}</dt>
+        <dt>{{ form_errors(form.title) }}</dt>
+    </dl>
+    <dl>
+        <dt>{{ form_label(form.text) }}</dt>
+        <dt>{{ form_widget(form.text) }}</dt>
+        <dt>{{ form_errors(form.text) }}</dt>
+    </dl>
+</div>
+{{ form_end(form) }}

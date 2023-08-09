@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}コメント投稿{% endblock %}
-{% block bread %}→ コメント投稿{% endblock %}
+{% block bread %}→ <a href="{{ path('app_micro_post_show_one', {id: post.id}) }}">Post</a>→  コメント投稿{% endblock %}
 {% block body %}
     {{ include('micro_post/_post.html.twig', {post: post}) }}
     {{ form_start(form) }}

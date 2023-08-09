@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
-
+{% set post = form.vars.value %}
 {% block title %}編集{% endblock %}
-{% block bread %}→ 編集{% endblock %}
+{% block bread %}→<a href="{{ path('app_micro_post_show_one', {id: post.id}) }}">詳細</a> → 編集{% endblock %}
 {% block body %}
     {{ include('micro_post/_form.html.twig', {form:form}) }}
 {% endblock %}

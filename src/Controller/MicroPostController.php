@@ -20,7 +20,7 @@ class MicroPostController extends AbstractController
     {
 
         return $this->render('micro_post/index.html.twig', [
-            'posts' => $repo->findAll(),
+            'posts' => $repo->findAllWithComments(),
         ]);
     }
     #[Route('/micro-post/{id}', name: 'app_micro_post_show_one')]

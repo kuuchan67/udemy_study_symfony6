@@ -5,6 +5,7 @@
 {% block body %}
     {{ include('micro_post/_post.html.twig', {post: post}) }}
     {{ form_start(form) }}
+    {{ form_row(form._token) }}
     <div>{{ form_errors(form)}}</div>
     <div>
         <dl>

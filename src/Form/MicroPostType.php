@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\MicroPost;
+use App\Setting\Form\FormSetting;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,8 +15,8 @@ class MicroPostType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $labelAttr = ['class' => 'block text-sm text-gray-700 dark:text-gray-300 font-medium'];
-        $attr = ['class' => 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'];
+        $labelAttr = ['class' => FormSetting::LABEL_CLASS];
+        $attr = ['class' => FormSetting::INPUT_CLASS];
 
         $builder
             ->add('title', TextType::class, [
@@ -30,7 +31,7 @@ class MicroPostType extends AbstractType
             ])
             ->add('submit', SubmitType::class, [
                 'label' => "投稿",
-                'attr' => ['class' => 'block w-full shadow-sm border-transparent bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2'],
+                'attr' => ['class' => FormSetting::SUBMIT_BUTTON_CLASS],
             ])
         ;
     }

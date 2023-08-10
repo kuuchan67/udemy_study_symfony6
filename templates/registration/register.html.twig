@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}新規登録{% endblock %}
+{% block bread %}→ 新規登録{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="rounded-md p-2 border-red-300 bg-red-50 border dark:border-red-600 dark:bg-red-700 dark:text-white mb-4" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword) }}
+    <div class="flex items-center mt-4 mb-4">
+        {{ form_row(registrationForm.agreeTerms) }}
+    </div>
+
+    <div>
+        <button type="submit" class="block w-full shadow-sm border-transparent bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">新規登録</button>
+    </div>
+    {{ form_end(registrationForm) }}
+{% endblock %}

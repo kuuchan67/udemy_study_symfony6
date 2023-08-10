@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class MicroPostController extends AbstractController
 {
@@ -24,16 +25,18 @@ class MicroPostController extends AbstractController
         ]);
     }
     #[Route('/micro-post/{id}', name: 'app_micro_post_show_one')]
-    public function showOne(MicroPost $microPost): Response
+    #[IsGranted(MicroPost::VIEW, 'post')]
+    public function showOne(MicroPost $post): Response
     {
 
         return $this->render('micro_post/show.html.twig', [
-            'post' => $microPost,
+            'post' => $post,
         ]);
 
     }
 
     #[Route('/micro-post/add', name: 'app_micro_post_add', priority: 2)]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function add(Request $request, MicroPostRepository $repo):Response
     {
         $form = $this->createForm(MicroPostType::class, new MicroPost());
@@ -43,6 +46,7 @@ class MicroPostController extends AbstractController
             /** @var MicroPost $post */
             $post = $form->getData();
             $post->setCreated(new \DateTime());
+            $post->setAuther($this->getUser());
             $repo->add($post, true);
             $this->addFlash(
                 'success',
@@ -60,6 +64,7 @@ class MicroPostController extends AbstractController
 
     }
     #[Route('/micro-post/{post}/edit', name: 'app_micro_post_edit')]
+    #[IsGranted(MicroPost::EDIT, 'post')]
     public function edit(MicroPost $post, Request $request, MicroPostRepository $repo):Response
     {
 
@@ -87,6 +92,7 @@ class MicroPostController extends AbstractController
     }
 
     #[Route('/micro-post/{post}/comment', name: 'app_micro_post_comment')]
+    #[IsGranted('ROLE_COMMENTER')]
     public function addComment(MicroPost $post, Request $request, CommentRepository $repo):Response
     {
 
@@ -97,6 +103,7 @@ class MicroPostController extends AbstractController
             $comment = $form->getData();
             $comment->setPost($post);
             $comment->setCreated(new \DateTime());
+            $comment->setAuther($this->getUser());
             $repo->add($comment, true);
             $this->addFlash(
                 'success',

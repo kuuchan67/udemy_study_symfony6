@@ -12,6 +12,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: MicroPostRepository::class)]
 class MicroPost
 {
+
+    public const EDIT = 'POST_EDIT';
+    public const VIEW = 'POST_VIEW';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -35,6 +39,10 @@ class MicroPost
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'liked')]
     private Collection $likedBy;
+
+    #[ORM\ManyToOne(inversedBy: 'posts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $auther = null;
 
     public function __construct()
     {
@@ -133,6 +141,18 @@ class MicroPost
     public function removeLikedBy(User $likedBy): static
     {
         $this->likedBy->removeElement($likedBy);
+
+        return $this;
+    }
+
+    public function getAuther(): ?User
+    {
+        return $this->auther;
+    }
+
+    public function setAuther(?User $auther): static
+    {
+        $this->auther = $auther;
 
         return $this;
     }

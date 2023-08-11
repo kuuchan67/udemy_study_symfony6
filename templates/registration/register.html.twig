@@ -12,7 +12,9 @@
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
+        {{ form_row(registrationForm.plainPassword.first) }}
+        {{ form_row(registrationForm.plainPassword.second) }}
+
     <div class="flex items-center mt-4 mb-4">
         {{ form_row(registrationForm.agreeTerms) }}
     </div>
@@ -21,4 +23,7 @@
         <button type="submit" class="block w-full shadow-sm border-transparent bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">新規登録</button>
     </div>
     {{ form_end(registrationForm) }}
+    <div class="mt-2 text-center text-gray-600 dark:text-gray-400">
+        <a href="{{ path('app_login') }}">ログインはこちら</a>
+    </div>
 {% endblock %}

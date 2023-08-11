@@ -14,7 +14,7 @@
         </a>
     </div>
     <div class="text-sm text-gray-500 dark:text-gray-400">
-        <a href="#">{{post.auther.email}}</a>
+        <a href="{{ path("app_profile", {id: post.auther.id}) }}">{{post.auther.email}}</a>
     </div>
     <div class="flex">
         <a href="{{ path('app_micro_post_edit', { post: post.id }) }}" class="mr-2">編集</a>

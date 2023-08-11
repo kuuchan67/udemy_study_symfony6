@@ -18,7 +18,7 @@
     </head>
     <body class="bg-gray-100 text-gray-800 m-10 dark:bg-gray-800 dark:text-white">
     <div class="w-full md:w-2/3 mx-auto mb-4 flex justify-between items-center">
-        <div class="text-4xl">
+        <div class="text-2xl">
             <a href="{{ path('app_micro_post') }}">Home</a>
             {% block bread %}
 
@@ -30,14 +30,17 @@
                     <div>
                         <a href="{{ path('app_micro_post_add') }}">新規投稿</a>
                     </div>
-                    <div>
+                    <div class="ml-2">
+                        <a href="{{ path('app_settings_profile') }}">設定</a>
+                    </div>
+                    <div class="ml-2">
                         <a href="{{ path('app_logout') }}">ログアウト</a>
                     </div>
                 {% else %}
                     <div>
                         <a href="{{ path('app_login') }}">ログイン</a>
                     </div>
-                    <div>
+                    <div class="ml-2">
                         <a href="{{ path('app_register') }}">新規登録</a>
                     </div>
                 {% endif %}

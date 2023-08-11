@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% set SUBMIT_BUTTON_CLASS = constant('App\\Setting\\Form\\FormSetting::SUBMIT_BUTTON_CLASS') %}
+
+{% block title %}会員情報設定{% endblock %}
+{% block bread %}→会員情報設定{% endblock %}
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_row(form._token) }}
+    <div>{{ form_errors(form)}}</div>
+    {{ include('settings_profile/_form.html.twig', {form:form}) }}
+    <div>
+        <button type="submit" class="{{ SUBMIT_BUTTON_CLASS }}">保存</button>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

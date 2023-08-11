@@ -8,11 +8,25 @@
     <div class="text-gray-500 dark:text-gray-400">
         {{ post.created | date("Y-m-d") }}
     </div>
+
     <div>
-        <a href="#">
-            Like <span class="px-2 rounded-md bg-gray-200 dark:bg-gray-700">0</span>
-        </a>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {% if post.likedBy.contains(app.user) %}
+            <a href="{{path('app_unlike', {id: post.id}) }}">
+                &#129505;
+            </a>
+            {% else %}
+            <a href="{{path('app_like', {id: post.id}) }}">
+
+                &#9829;
+            </a>
+            {% endif %}
+        {% else %}
+            &#9829;
+        {% endif %}
+       <span class="px-2 rounded-md bg-gray-200 dark:bg-gray-700">{{ post.likedBy.count }}</span>
     </div>
+
     <div class="text-sm text-gray-500 dark:text-gray-400">
         <a href="{{ path("app_profile", {id: post.auther.id}) }}">{{post.auther.email}}</a>
     </div>

@@ -3,6 +3,7 @@
 {% block title %}プロフィール{% endblock %}
 {% block bread %}→ プロフィール{% endblock %}
 {% block body %}
+
     <div class="flex items-center">
         <div>
             <div class="text-2xl">{{ user.userProfile.name ?? user.email }}</div>
@@ -26,6 +27,9 @@
                     </div>
                 </div>
             {% endif %}
+        </div>
+        <div class="ml-I6 text-2xl">
+            {{ include("follower/_follow_button.html.twig", {userToFollow : user}) }}
         </div>
     </div>
     <div class="my-4 border">

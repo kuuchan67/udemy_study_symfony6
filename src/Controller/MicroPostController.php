@@ -46,7 +46,7 @@ class MicroPostController extends AbstractController
             /** @var MicroPost $post */
             $post = $form->getData();
             $post->setCreated(new \DateTime());
-            $post->setAuther($this->getUser());
+            $post->setAuthor($this->getUser());
             $repo->add($post, true);
             $this->addFlash(
                 'success',
@@ -103,7 +103,7 @@ class MicroPostController extends AbstractController
             $comment = $form->getData();
             $comment->setPost($post);
             $comment->setCreated(new \DateTime());
-            $comment->setAuther($this->getUser());
+            $comment->setAuthor($this->getUser());
             $repo->add($comment, true);
             $this->addFlash(
                 'success',

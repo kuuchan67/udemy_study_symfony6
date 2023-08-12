@@ -3,8 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\MicroPost;
+use App\Entity\User;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 
 /**
  * @extends ServiceEntityRepository<MicroPost>
@@ -41,12 +45,95 @@ class MicroPostRepository extends ServiceEntityRepository
 
     public function findAllWithComments(): array
     {
-        $qb = $this->createQueryBuilder('p');
-        $qb->leftJoin('p.comments', 'c')
-            ->addSelect('c')
-            ->orderBy('p.created', 'DESC');
+        $qb = $this->_findAllQuery(withComments: true);
         return $qb->getQuery()->getResult();
 
+    }
+
+    public function findAllByAuthor(
+        int | User $author
+    ): array {
+        return $this->_findAllQuery(
+            withComments: true,
+            withLikes: true,
+            withAuthors: true,
+            withProfiles: true
+        )->where('p.author = :author')
+            ->setParameter(
+                'author',
+                $author instanceof User ? $author->getId() : $author
+            )->getQuery()
+            ->getResult();
+    }
+
+    public function findAllByAuthors(
+        Collection|array $authors
+    ): array {
+        return $this->_findAllQuery(
+            withComments: true,
+            withLikes: true,
+            withAuthors: true,
+            withProfiles: true
+        )->where('p.author IN (:authors)')
+            ->setParameter(
+                'authors',
+                $authors
+            )->getQuery()
+            ->getResult();
+    }
+
+    public function findAllWithMinLikes(int $minLikes): array
+    {
+        $idList = $this->_findAllQuery(
+            withLikes: true,
+        )->select('p.id')
+            ->groupBy('p.id')
+            ->having('COUNT(l) >= :minLikes')
+            ->setParameter('minLikes', $minLikes)
+            ->getQuery()
+            ->getResult(Query::HYDRATE_SCALAR_COLUMN);
+
+        return $this->_findAllQuery(
+            withComments: true,
+            withLikes: true,
+            withAuthors: true,
+            withProfiles: true
+        )->where('p.id in (:idList)')
+            ->setParameter('idList', $idList)
+            ->getQuery()
+            ->getResult();
+    }
+
+    private function _findAllQuery(
+        bool $withComments = false,
+        bool $withLikes = false,
+        bool $withAuthors = false,
+        bool $withProfiles = false,
+    ): QueryBuilder {
+
+        $qb = $this->createQueryBuilder('p');
+
+        if ($withComments) {
+            $qb->leftJoin('p.comments', 'c')
+                ->addSelect('c');
+        }
+
+        if ($withLikes) {
+            $qb->leftJoin('p.likedBy', 'l')
+                ->addSelect('l');
+        }
+
+        if ($withAuthors || $withProfiles) {
+            $qb->leftJoin('p.author', 'a')
+                ->addSelect('a');
+        }
+
+        if ($withProfiles) {
+            $qb->leftJoin('a.userProfile', 'up')
+                ->addSelect('up');
+        }
+
+        return $qb->orderBy('p.created', 'DESC');
     }
 
 //    /**

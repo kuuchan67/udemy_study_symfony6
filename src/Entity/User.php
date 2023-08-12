@@ -38,7 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: MicroPost::class, mappedBy: 'likedBy')]
     private Collection $liked;
 
-    #[ORM\OneToMany(mappedBy: 'auther', targetEntity: MicroPost::class)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: MicroPost::class)]
     private Collection $posts;
 
     #[ORM\OneToMany(mappedBy: 'auther', targetEntity: Comment::class)]
@@ -196,7 +196,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->posts->contains($post)) {
             $this->posts->add($post);
-            $post->setAuther($this);
+            $post->setAuthor($this);
         }
 
         return $this;
@@ -206,8 +206,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->posts->removeElement($post)) {
             // set the owning side to null (unless already changed)
-            if ($post->getAuther() === $this) {
-                $post->setAuther(null);
+            if ($post->getAuthor() === $this) {
+                $post->setAuthor(null);
             }
         }
 
@@ -226,7 +226,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->comments->contains($comment)) {
             $this->comments->add($comment);
-            $comment->setAuther($this);
+            $comment->setAuthor($this);
         }
 
         return $this;
@@ -236,8 +236,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($comment->getAuther() === $this) {
-                $comment->setAuther(null);
+            if ($comment->getAuthor() === $this) {
+                $comment->setAuthor(null);
             }
         }
 

@@ -48,7 +48,7 @@ class MicroPostVoter extends Voter
             case MicroPost::EDIT:
                 // logic to determine if the user can EDIT
                 // return true or false
-                return $isAuth && ($subject->getAuther()->getId() === $user->getId()) ||
+                return $isAuth && ($subject->getAuthor()->getId() === $user->getId()) ||
                     $this->security->isGranted('ROLE_EDITOR');
             case MicroPost::VIEW:
                 // logic to determine if the user can VIEW

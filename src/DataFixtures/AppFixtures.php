@@ -43,21 +43,21 @@ class AppFixtures extends Fixture
         $microPost->setTitle("最初の投稿");
         $microPost->setText("最初の投稿です");
         $microPost->setCreated(new \DateTime());
-        $microPost->setAuther($user1);
+        $microPost->setAuthor($user1);
         $manager->persist($microPost);
 
         $microPost2 = new MicroPost();
         $microPost2->setTitle("最初の投稿2");
         $microPost2->setText("最初の投稿2です");
         $microPost2->setCreated(new \DateTime());
-        $microPost2->setAuther($user1);
+        $microPost2->setAuthor($user1);
         $manager->persist($microPost2);
 
         $microPost3 = new MicroPost();
         $microPost3->setTitle("最初の投稿3");
         $microPost3->setText("最初の投稿3です");
         $microPost3->setCreated(new \DateTime());
-        $microPost3->setAuther($user2);
+        $microPost3->setAuthor($user2);
         $manager->persist($microPost3);
 
         $manager->flush();

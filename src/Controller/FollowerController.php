@@ -20,7 +20,6 @@ class FollowerController extends AbstractController
         $currentUser = $this->getUser();
         if ($userToFollow->getId() !== $currentUser->getId()) {
             $currentUser->addFollow($userToFollow);
-            $managerRegistory->getManager()->persist($currentUser);
             $managerRegistory->getManager()->flush();
         }
         return $this->redirect($request->headers->get('referer'));
@@ -36,7 +35,6 @@ class FollowerController extends AbstractController
         $currentUser = $this->getUser();
         if ($userToUnfollow->getId() !== $currentUser->getId()) {
             $currentUser->removeFollow($userToUnfollow);
-            $managerRegistory->getManager()->persist($currentUser);
             $managerRegistory->getManager()->flush();
         }
         return $this->redirect($request->headers->get('referer'));

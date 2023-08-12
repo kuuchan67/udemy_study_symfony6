@@ -1,16 +1,15 @@
 {% extends 'base.html.twig' %}
 {% set SUBMIT_BUTTON_CLASS = constant('App\\Setting\\Form\\FormSetting::SUBMIT_BUTTON_CLASS') %}
 
-{% block title %}プロフィール設定{% endblock %}
-{% block bread %}→プロフィール設定{% endblock %}
+{% block title %}プロフィール画像{% endblock %}
+{% block bread %}→プロフィール画像{% endblock %}
 {% block body %}
     {{ include('settings_profile/_settings_profile_tabs.html.twig') }}
     {{ form_start(form) }}
-    {{ form_row(form._token) }}
-    <div>{{ form_errors(form)}}</div>
-    {{ include('settings_profile/_form.html.twig', {form:form}) }}
+    {{ form_row(form.profileImage) }}
     <div>
         <button type="submit" class="{{ SUBMIT_BUTTON_CLASS }}">保存</button>
     </div>
     {{ form_end(form) }}
+
 {% endblock %}

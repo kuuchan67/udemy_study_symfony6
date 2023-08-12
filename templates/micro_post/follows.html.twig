@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}全投稿{% endblock %}
-
+{% block title %}フォローユーザーの投稿{% endblock %}
+{% block bread %}→ フォローユーザーの投稿{% endblock %}
 {% block body %}
     {{ include('micro_post/_post_tabs.html.twig') }}
     {{ include('micro_post/_post_list.html.twig', {posts:posts}) }}

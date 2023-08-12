@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}全投稿{% endblock %}
-
+{% block title %}人気の投稿{% endblock %}
+{% block bread %}→ 人気の投稿{% endblock %}
 {% block body %}
     {{ include('micro_post/_post_tabs.html.twig') }}
     {{ include('micro_post/_post_list.html.twig', {posts:posts}) }}
+
 {% endblock %}

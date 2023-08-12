@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}プロフィール-フォロワー{% endblock %}
+{% block bread %}→ プロフィール→フォロワー{% endblock %}
+{% block body %}
+    {{ include ('profile/_profile_header.html.twig') }}
+    {{ include ('profile/_profile_tabs.html.twig') }}
+
+    {{ include('follower/_follower_list.html.twig', {users:user.followers}) }}
+{% endblock %}

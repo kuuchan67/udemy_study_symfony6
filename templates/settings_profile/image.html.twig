@@ -5,8 +5,13 @@
 {% block bread %}→プロフィール画像{% endblock %}
 {% block body %}
     {{ include('settings_profile/_settings_profile_tabs.html.twig') }}
-    {{ form_start(form) }}
-    {{ form_row(form.profileImage) }}
+    <div class="flex items-center">
+        {{ include('shared/_avatar.html.twig', {'size': 32, profile: app.user.userProfile}) }}
+        <div class="ml-16">
+        {{ form_start(form) }}
+        {{ form_row(form.profileImage) }}
+        </div>
+    </div>
     <div>
         <button type="submit" class="{{ SUBMIT_BUTTON_CLASS }}">保存</button>
     </div>

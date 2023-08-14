@@ -12,5 +12,8 @@
         <dt>{{ form_widget(form.text) }}</dt>
         <dt>{{ form_errors(form.text) }}</dt>
     </dl>
+    <div class="flex items-center mt-4 mb-4">
+        {{ form_row(form.extraPrivacy) }}
+    </div>
 </div>
 {{ form_end(form) }}

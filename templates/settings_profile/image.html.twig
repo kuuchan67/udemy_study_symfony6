@@ -18,3 +18,21 @@
     {{ form_end(form) }}
 
 {% endblock %}
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const id = "{{ form.profileImage.vars.id }}";
+            document.getElementById(id).addEventListener('change', function (e) {
+                // 1枚だけ表示する
+                const file = e.target.files[0];
+
+                // ファイルのブラウザ上でのURLを取得する
+                const blobUrl = window.URL.createObjectURL(file);
+
+                // img要素に表示
+                const img = document.getElementById('preview_image');
+                img.src = blobUrl;
+            });
+        })
+    </script>
+{% endblock %}

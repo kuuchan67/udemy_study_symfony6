@@ -142,3 +142,4 @@ PNGまたはJPG画像ファイルをアップロードしてください: PNGま
 'You should agree to our terms.': '利用規約に同意してくだっさい'
 入力してください: 入力してください
 '最低 {{ limit }} 文字以上で入力してください': '最低 {{ limit }} 文字以上で入力してください'
+'The presented password is invalid.': ログインできませんでした。

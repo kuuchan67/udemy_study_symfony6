@@ -6,6 +6,11 @@
 {% block bread %}→ ログイン{% endblock %}
 {% block body %}
     <form action="{{ path("app_login") }}" method="post">
+        {% if error %}
+            <div class="text-red-700">
+                {{ error.messageKey | trans({}, 'security')  }}
+            </div>
+        {% endif %}
         <input type="hidden" name="_csrf_token"
                value="{{ csrf_token('authenticate') }}"
         >

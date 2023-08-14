@@ -1,7 +1,7 @@
 'An authentication exception occurred.': 認証エラーが発生しました。
 'Authentication credentials could not be found.': 認証資格がありません。
 'Authentication request could not be processed due to a system problem.': システムの問題により認証要求を処理できませんでした。
-'Invalid credentials.': 資格が無効です。
+'Invalid credentials.': ログインできませんでした。
 'Cookie has already been used by someone else.': 'Cookie が別のユーザーで使用されています。'
 'Not privileged to request the resource.': リソースをリクエストする権限がありません。
 'Invalid CSRF token.': 'CSRF トークンが無効です。'
@@ -17,3 +17,4 @@
 'Invalid or expired login link.': ログインリンクが有効期限切れ、もしくは無効です。
 'Too many failed login attempts, please try again in %minutes% minute.': ログイン試行回数が多すぎます。%minutes%分後に再度お試しください。
 'Too many failed login attempts, please try again in %minutes% minutes.': ログイン試行回数が多すぎます。%minutes%分後に再度お試しください。
+
